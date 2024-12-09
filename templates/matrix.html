@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matriz de Restricciones</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); 
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin: 0; 
+        }
+
+        .container {
+            max-width: 600px; 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-radius: 10px; 
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+            overflow: auto;
+        }
+        h1, h3 {
+            color: #800080; /* Morado */
+        }
+        input[type="number"] {
+            width: 60px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Completar la Matriz</h1>
+        <form method="POST" action="{{ url_for('resolver') }}">
+            <input type="hidden" name="tipo_objetivo" value="{{ tipo_objetivo }}">
+            <input type="hidden" name="num_variables" value="{{ num_variables }}">
+            <input type="hidden" name="num_restricciones" value="{{ num_restricciones }}">
+
+            <h3>Función Objetivo</h3>
+            <p>{{ tipo_objetivo }} = 
+                {% for i in range(num_variables) %}
+                    <input type="number" name="coef_objetivo" step="any" required> x{{ i + 1 }}
+                    {% if i < num_variables - 1 %} + {% endif %}
+                {% endfor %}
+            </p>
+
+            <h3>Restricciones</h3>
+            {% for i in range(num_restricciones) %}
+                <p>
+                    {% for j in range(num_variables) %}
+                        <input type="number" name="restriccion_coef_{{ i }}" step="any" required> x{{ j + 1 }}
+                        {% if j < num_variables - 1 %} + {% endif %}
+                    {% endfor %}
+                    <select name="tipo_restriccion_{{ i }}">
+                        <option value="<=">&lt;=</option>
+                        <option value=">=">&gt;=</option>
+                        <option value="=">=</option>
+                    </select>
+                    <input type="number" name="valor_restriccion_{{ i }}" step="any" required>
+                </p>
+            {% endfor %}
+            <button type="submit" class="btn btn-success">Resolver</button>
+        </form>
+    </div>
+</body>
+</html>

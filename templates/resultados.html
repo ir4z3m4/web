@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0; 
+        }
+
+        body {
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); /* Degradado de fondo */
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        .container {
+            max-width: 800px; 
+            width: 90%; 
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px; 
+            padding: 20px; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+            overflow: auto; 
+        }
+
+        h1, h3 {
+            color: #800080; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Resultados</h1>
+
+        <p><strong>Valor Óptimo:</strong> {{ resultados.valor_optimo }}</p>
+        <h3>Solución Óptima:</h3>
+        <ul>
+            {% for key, value in resultados.solucion_optima.items() %}
+                <li>{{ key }} = {{ value }}</li>
+            {% endfor %}
+        </ul>
+        
+        {% if num_variables <= 2 %}
+            <h3>Gráfica de la Solución:</h3>
+            <img src="{{ url_for('static', filename='solution_plot.png') }}" alt="Gráfica de la Solución" style="max-width: 100%;">
+        {% endif %}
+
+        <a href="{{ url_for('home') }}" class="btn btn-primary">Volver a la entrada</a>
+    </div>
+</body>
+</html>

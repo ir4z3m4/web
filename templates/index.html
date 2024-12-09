@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación Lineal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0; 
+        }
+
+        body {
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 90%; 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-radius: 10px; 
+            padding: 20px; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+        }
+
+        h1 {
+            color: #800080; 
+            text-align: center; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Resolver Problema</h1>
+        <form method="POST" class="mt-4">
+            <div class="form-group">
+                <label for="tipo_objetivo">¿Desea maximizar o minimizar?</label>
+                <select class="form-control" id="tipo_objetivo" name="tipo_objetivo" required>
+                    <option value="Max">Maximizar</option>
+                    <option value="Min">Minimizar</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="num_variables">Número de variables</label>
+                <input type="number" class="form-control" id="num_variables" name="num_variables" required>
+            </div>
+            <div class="form-group">
+                <label for="num_restricciones">Número de restricciones</label>
+                <input type="number" class="form-control" id="num_restricciones" name="num_restricciones" required>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Continuar</button> <!-- btn-block para que el botón ocupe todo el ancho -->
+        </form>
+    </div>
+</body>
+</html>
